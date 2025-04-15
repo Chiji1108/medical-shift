@@ -14,6 +14,7 @@ export const H1 = forwardRef<
     )}
   />
 ));
+H1.displayName = "H1";
 
 export const H2 = forwardRef<
   HTMLHeadingElement,
@@ -28,6 +29,7 @@ export const H2 = forwardRef<
     )}
   />
 ));
+H2.displayName = "H2";
 
 export const H3 = forwardRef<
   HTMLHeadingElement,
@@ -42,6 +44,7 @@ export const H3 = forwardRef<
     )}
   />
 ));
+H3.displayName = "H3";
 
 export const H4 = forwardRef<
   HTMLHeadingElement,
@@ -56,6 +59,7 @@ export const H4 = forwardRef<
     )}
   />
 ));
+H4.displayName = "H4";
 
 export const P = forwardRef<
   HTMLParagraphElement,
@@ -67,6 +71,7 @@ export const P = forwardRef<
     className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
   />
 ));
+P.displayName = "P";
 
 export const Blockquote = forwardRef<
   HTMLQuoteElement,
@@ -78,6 +83,7 @@ export const Blockquote = forwardRef<
     className={cn("mt-6 border-l-2 pl-6 italic", className)}
   />
 ));
+Blockquote.displayName = "Blockquote";
 
 export const Code = forwardRef<HTMLPreElement, HTMLAttributes<HTMLPreElement>>(
   ({ className, ...props }, ref) => (
@@ -91,6 +97,7 @@ export const Code = forwardRef<HTMLPreElement, HTMLAttributes<HTMLPreElement>>(
     />
   )
 );
+Code.displayName = "Code";
 
 export const Large = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
@@ -101,6 +108,7 @@ export const Large = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     />
   )
 );
+Large.displayName = "Large";
 
 export const Small = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
@@ -111,6 +119,7 @@ export const Small = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     />
   )
 );
+Small.displayName = "Small";
 
 export const Muted = forwardRef<
   HTMLParagraphElement,
@@ -122,3 +131,4 @@ export const Muted = forwardRef<
     className={cn("text-sm text-muted-foreground", className)}
   />
 ));
+Muted.displayName = "Muted";
