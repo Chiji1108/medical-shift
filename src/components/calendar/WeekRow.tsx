@@ -1,5 +1,5 @@
 import { getWeekDates } from "@/lib/date";
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 
 type WeekRowProps = {
   date?: Date;
