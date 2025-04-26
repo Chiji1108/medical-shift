@@ -30,7 +30,7 @@ export const ShiftEdit = () => {
       {selectedDate && (
         <div className="flex flex-col gap-4 px-4">
           <div className="flex flex-row justify-between items-center">
-            <p className="text-lg font-bold py-1">
+            <p className="text-lg font-bold py-1" suppressHydrationWarning>
               {selectedDate.toLocaleDateString(undefined, {
                 year: "numeric",
                 month: "long",

@@ -23,7 +23,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
       >
         <ChevronLeft />
       </Button>
-      <p className="text-2xl font-bold">
+      <p className="text-2xl font-bold" suppressHydrationWarning>
         {yearMonth.toLocaleDateString(undefined, {
           year: "numeric",
           month: "long",

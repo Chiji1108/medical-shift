@@ -19,7 +19,7 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
     <>
       <WeekRow>
         {(date) => (
-          <p className="text-xs">
+          <p className="text-xs" suppressHydrationWarning>
             {date.toLocaleDateString(undefined, {
               weekday: "short",
             })}
