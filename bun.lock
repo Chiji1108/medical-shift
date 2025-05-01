@@ -5,6 +5,7 @@
       "name": "medical-shift",
       "dependencies": {
         "@hookform/resolvers": "^5.0.1",
+        "@powersync/react": "^1.5.3",
         "@powersync/web": "^1.19.0",
         "@radix-ui/react-accordion": "^1.2.7",
         "@radix-ui/react-alert-dialog": "^1.1.10",
@@ -253,6 +254,8 @@
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
 
     "@powersync/common": ["@powersync/common@1.28.0", "", { "dependencies": { "js-logger": "^1.6.1" } }, "sha512-whV7JfeAkr+VoO+ptJUVVtlBfpwTg7/v6Rv2DHM02DXENmyIFj+u8bFFXyP9B+7kiM8+26kKMkn9ZXgSh2Rzfg=="],
+
+    "@powersync/react": ["@powersync/react@1.5.3", "", { "peerDependencies": { "@powersync/common": "^1.28.0", "react": "*" } }, "sha512-W4qNUkw60Gbzg66osUGQKeGY4lZOXioLiNf0gPfW7NpRKEJXKHxGTOlBYAemcwhDB162ZEAY5O2LidZAsLeyvQ=="],
 
     "@powersync/web": ["@powersync/web@1.19.0", "", { "dependencies": { "@powersync/common": "1.28.0", "async-mutex": "^0.4.0", "bson": "^6.6.0", "comlink": "^4.4.2", "commander": "^12.1.0" }, "peerDependencies": { "@journeyapps/wa-sqlite": "^1.2.2" }, "bin": { "powersync-web": "bin/powersync.js" } }, "sha512-dZbO+wwqiYZShzkhGEyercu0nZhIrZCQuBz0XwFLkM1fwrWEe2MlAGNsHGgwakisdH5yYmK9NjuVkZjsyDyNYg=="],
 
