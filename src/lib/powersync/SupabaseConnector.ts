@@ -1,18 +1,12 @@
 import {
-  AbstractPowerSyncDatabase,
-  BaseObserver,
-  CrudEntry,
-  PowerSyncBackendConnector,
+  type AbstractPowerSyncDatabase,
+  type CrudEntry,
+  type PowerSyncBackendConnector,
   UpdateType,
 } from "@powersync/web";
 
-import { Session, SupabaseClient, createClient } from "@supabase/supabase-js";
-
-export type SupabaseConfig = {
-  supabaseUrl: string;
-  supabaseAnonKey: string;
-  powersyncUrl: string;
-};
+import { createClient } from "@/lib/supabase/client";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 /// Postgres Response codes that we cannot recover from by retrying.
 const FATAL_RESPONSE_CODES = [
@@ -26,69 +20,13 @@ const FATAL_RESPONSE_CODES = [
   new RegExp("^42501$"),
 ];
 
-export type SupabaseConnectorListener = {
-  initialized: () => void;
-  sessionStarted: (session: Session) => void;
-};
-
-export class SupabaseConnector
-  extends BaseObserver<SupabaseConnectorListener>
-  implements PowerSyncBackendConnector
-{
+export class SupabaseConnector implements PowerSyncBackendConnector {
   readonly client: SupabaseClient;
-  readonly config: SupabaseConfig;
-
-  ready: boolean;
-
-  currentSession: Session | null;
+  readonly powersyncUrl: string;
 
   constructor() {
-    super();
-    this.config = {
-      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      powersyncUrl: process.env.NEXT_PUBLIC_POWERSYNC_URL!,
-      supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    };
-
-    this.client = createClient(
-      this.config.supabaseUrl,
-      this.config.supabaseAnonKey,
-      {
-        auth: {
-          persistSession: true,
-        },
-      }
-    );
-    this.currentSession = null;
-    this.ready = false;
-  }
-
-  async init() {
-    if (this.ready) {
-      return;
-    }
-
-    const sessionResponse = await this.client.auth.getSession();
-    this.updateSession(sessionResponse.data.session);
-
-    this.ready = true;
-    this.iterateListeners((cb) => cb.initialized?.());
-  }
-
-  async login(username: string, password: string) {
-    const {
-      data: { session },
-      error,
-    } = await this.client.auth.signInWithPassword({
-      email: username,
-      password: password,
-    });
-
-    if (error) {
-      throw error;
-    }
-
-    this.updateSession(session);
+    this.powersyncUrl = process.env.NEXT_PUBLIC_POWERSYNC_URL!;
+    this.client = createClient();
   }
 
   async fetchCredentials() {
@@ -104,7 +42,7 @@ export class SupabaseConnector
     console.debug("session expires at", session.expires_at);
 
     return {
-      endpoint: this.config.powersyncUrl,
+      endpoint: this.powersyncUrl,
       token: session.access_token ?? "",
       expiresAt: session.expires_at
         ? new Date(session.expires_at * 1000)
@@ -170,13 +108,5 @@ export class SupabaseConnector
         throw ex;
       }
     }
-  }
-
-  updateSession(session: Session | null) {
-    this.currentSession = session;
-    if (!session) {
-      return;
-    }
-    this.iterateListeners((cb) => cb.sessionStarted?.(session));
   }
 }
